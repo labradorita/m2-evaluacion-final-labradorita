@@ -1,6 +1,15 @@
 body {
-  margin: 0;
+  margin: 20;
   font-family: "Abril Fatface", cursive;
+  font-size: 20px;
+}
+
+.series__item {
+  background-color: red;
+}
+
+.serie__item--favorite {
+  background-color: green;
 }
 
 /*# sourceMappingURL=main.css.map */

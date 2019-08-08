@@ -1,7 +1,15 @@
 @import "core/variables";
 
 body {
-  margin: 0;
-  background-color: blue;
+  margin: 20;
   font-family: $fontPrimary;
+  font-size: 20px;
+}
+
+.series__item {
+  background-color: red;
+}
+
+.serie__item--favorite {
+  background-color: green;
 }
