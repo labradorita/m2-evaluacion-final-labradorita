@@ -45,7 +45,7 @@ const getDataFromServer = () => {
       paintSeries();
       listenSeries();
       getSeriesFromLS();
-      setSeriesIntoLS(); //despues de guardar
+      setSeriesIntoLS(); //después de guardar
     });
 };
 
