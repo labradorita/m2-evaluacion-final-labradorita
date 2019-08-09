@@ -1,21 +1,45 @@
 "use strict";
-console.log(">> Ready :)");
 
 let series = [];
-const favSeries = [];
+let favSeries = [];
 const inputText = document.querySelector(".js-input");
 const buttonSearch = document.querySelector(".js-button");
-//const mainList = document.querySelector(".js-list");
 
 const defImage = "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
 
-// traer datos del servidor/API
+// Escribir (set) y recuperar (get) datos del Local Storage
+const getSeriesFromLS = () => {
+  // separar el return y la constante
+  const data = JSON.parse(localStorage.getItem("favSeries"));
+  // si data contiene datos
+  if (!!data === true) {
+    favSeries = data;
+  }
+  //return data;
+};
+
+const setSeriesIntoLS = () => {
+  localStorage.setItem("favSeries", JSON.stringify(favSeries));
+};
+
+// Recoger favoritos al refrescar
+const startSearch = () => {
+  const seriesFromLS = getSeriesFromLS();
+  if (seriesFromLS === null) {
+    buttonSearch.addEventListener("click", getDataFromServer);
+  } else {
+    //saveFavsInFav(seriesFromLS);
+    paintFavSeries();
+    buttonSearch.addEventListener("click", getDataFromServer);
+  }
+};
+
+// traer datos del servidor/API y devolverlos en formato JSON
 
 const getDataFromServer = () => {
   return fetch(`http://api.tvmaze.com/search/shows?q=${inputText.value}`)
     .then(response => response.json())
     .then(data => {
-      console.log("Fetch data from server and return it as JSON >>> Return", data);
       data = formatData(data);
       saveDataInSeries(data);
       paintSeries();
@@ -28,12 +52,6 @@ const getDataFromServer = () => {
 // creamos array de las peliculas buscadas, con los datos necesarios
 const formatData = function(data) {
   const searchResult = [];
-  //for (const palette of data.palettes) {
-  // for (let i = 0; i < data.length; i = i + 1) {
-  //   searchResult.push({
-  //     name: data[i].show.name,
-  //     image: data[i].show.image.medium
-  // }
   for (const serieItem of data) {
     searchResult.push({
       name: serieItem.show.name,
@@ -76,7 +94,6 @@ const paintSeries = () => {
     htmlCode += "</div>";
   }
   mainList.innerHTML = htmlCode;
-  console.log("Paint series form `series` array into DOM >>> series:", series, "Favourites:", favSeries);
 };
 
 const getFavClassName = serieIndex => {
@@ -89,7 +106,6 @@ const getFavClassName = serieIndex => {
 
 // Esuchar si se ha hecho click (fav) y coger esa acción
 const listenSeries = () => {
-  console.log("Listen click on new serie DOM elements");
   const serieContainer = document.querySelectorAll(".js-serie");
   for (const serieContainerIndex of serieContainer) {
     serieContainerIndex.addEventListener("click", handleClick);
@@ -106,6 +122,9 @@ const handleClick = ev => {
     addFav(serieIndex);
   }
 
+  paintFavSeries();
+  setSeriesIntoLS();
+  getSeriesFromLS();
   paintSeries();
   listenSeries();
   // Actualizar LS con los favoritos
@@ -118,49 +137,26 @@ const getClickedSerieIndex = ev => {
   const currentTarget = ev.currentTarget;
   // index es una propiedad añadida con data-*, la convertimos a nº
   const clickedSerieIndex = parseInt(currentTarget.dataset.index);
-  console.log("Get clicked palette from event and return the clicked palette index >>> Clicked palette:", clickedSerieIndex);
   return clickedSerieIndex;
 };
 
 const isFavSerie = serieIndex => {
-  const foundIndex = favSeries.indexOf(series[serieIndex]);
-  // acción + operación matemática =0 --> boolean
-  if (foundIndex >= 0) {
-    console.log(`Check if serieIndex ${serieIndex} it is favourite >>>`, true);
-    return true;
-  } else {
-    console.log(`Check if serieIndex ${serieIndex} it is not favourite >>>`, false);
-    return false;
-  }
+  const found = favSeries.some(item => item.name === series[serieIndex].name);
+  return found;
 };
 
 const addFav = serieIndex => {
-  // Tenemos que pasarle el objeto entero para llamarlo de LS
-  favSeries.push(series[serieIndex]);
-  //favSeries.push(serieIndex);
-  console.log("Add serieIndex to `favSeries` array >>> Favourites:", favSeries);
-  paintFavSeries();
-  getSeriesFromLS();
-  setSeriesIntoLS();
-  paintSeries();
-  listenSeries();
+  if (isFavSerie(serieIndex) === false) {
+    // Tenemos que pasarle el objeto entero para llamarlo de LS
+    favSeries.push(series[serieIndex]);
+    console.log("Add serie Index to `favSeries` array >>> Favourites:", favSeries);
+  }
 };
 
 const removeFav = serieIndex => {
   const favIndex = favSeries.indexOf(series[serieIndex]);
   favSeries.splice(favIndex, 1);
-  console.log("Remove paletteIndex from `favSeries` array >>> Favourites:", favSeries);
-  paintFavSeries();
-  listenSeries();
-};
-
-// Escribir (set) y recuperar (get) datos del Local Storage
-const getSeriesFromLS = () => {
-  return JSON.parse(localStorage.getItem("favSeries"));
-};
-
-const setSeriesIntoLS = () => {
-  localStorage.setItem("favSeries", JSON.stringify(favSeries));
+  console.log("Remove from array `favSeries`>>> Favourites:", favSeries);
 };
 
 const paintFavSeries = () => {
@@ -176,3 +172,4 @@ const paintFavSeries = () => {
 };
 
 buttonSearch.addEventListener("click", getDataFromServer);
+startSearch();

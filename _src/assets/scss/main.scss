@@ -3,7 +3,7 @@
 .body {
   margin: 20;
   font-family: $fontPrimary;
-  font-size: 20px;
+  font-size: 30px;
 }
 .favAndList {
   display: flex;
@@ -11,7 +11,9 @@
 .sectionSearch {
   padding: 0px 40px;
 }
-
+.page__header {
+  flex-basis: auto;
+}
 .header {
   text-align: center;
   color: $colorPrimary;
@@ -29,10 +31,12 @@
   color: $colorWhite;
   font-size: 18px;
   padding: 15px 20px;
+  border-radius: 10px;
 }
 .titleFav {
   color: $colorPrimary;
-  margin: 15px 15px 0px 15px;
+  margin: 15px 15px 15px 15px;
+  font-size: 30px;
 }
 
 // Section search
@@ -68,10 +72,12 @@
 
 // Fav
 .containerFav {
-  display: inline-block;
+  display: flex;
   flex-direction: column;
   width: 25%;
   padding-right: 40px;
+  align-items: center;
+  align-content: center;
 }
 .listFav {
   list-style: none;
@@ -82,16 +88,22 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-
+  border: solid 2px $colorPrimary;
+  margin-bottom: 20px;
+  background: linear-gradient(to bottom, rgb(196, 146, 153), #6f2f37);
   align-items: center;
-}
-.fav__image {
-  align-items: center;
-  height: 75px;
-  width: 50px;
-  padding: 10px;
-}
-.fav__name {
-  font-size: 12px;
-  margin: 5px 0px 0px 0px;
+  align-content: center;
+  width: 100px;
+  .fav__image {
+    align-items: center;
+    height: 75px;
+    width: 50px;
+    margin-top: 5px;
+  }
+  .fav__name {
+    padding-top: 5px;
+    font-size: 12px;
+    margin: 5px 0px 0px 0px;
+    color: $colorWhite;
+  }
 }

@@ -1,7 +1,7 @@
 .body {
   margin: 20;
-  font-family: "Abril Fatface", cursive;
-  font-size: 20px;
+  font-family: "Acme", sans-serif;
+  font-size: 30px;
 }
 
 .favAndList {
@@ -12,6 +12,11 @@
 
 .sectionSearch {
   padding: 0px 40px;
+}
+
+.page__header {
+  -ms-flex-preferred-size: auto;
+  flex-basis: auto;
 }
 
 .header {
@@ -32,11 +37,13 @@
   color: #f3f4f5;
   font-size: 18px;
   padding: 15px 20px;
+  border-radius: 10px;
 }
 
 .titleFav {
   color: #6f2f37;
-  margin: 15px 15px 0px 15px;
+  margin: 15px 15px 15px 15px;
+  font-size: 30px;
 }
 
 .searchList {
@@ -80,13 +87,20 @@
 }
 
 .containerFav {
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
   width: 25%;
   padding-right: 40px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
 }
 
 .listFav {
@@ -105,23 +119,32 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  border: solid 2px #6f2f37;
+  margin-bottom: 20px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#c49299), to(#6f2f37));
+  background: linear-gradient(to bottom, #c49299, #6f2f37);
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  width: 100px;
 }
 
-.fav__image {
+.fav__item .fav__image {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   height: 75px;
   width: 50px;
-  padding: 10px;
+  margin-top: 5px;
 }
 
-.fav__name {
+.fav__item .fav__name {
+  padding-top: 5px;
   font-size: 12px;
   margin: 5px 0px 0px 0px;
+  color: #f3f4f5;
 }
 
 /*# sourceMappingURL=main.css.map */
