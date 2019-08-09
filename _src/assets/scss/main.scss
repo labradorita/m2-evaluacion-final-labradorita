@@ -1,15 +1,97 @@
 @import "core/variables";
 
-body {
+.body {
   margin: 20;
   font-family: $fontPrimary;
   font-size: 20px;
 }
-
-.series__item {
-  background-color: red;
+.favAndList {
+  display: flex;
+}
+.sectionSearch {
+  padding: 0px 40px;
 }
 
-.serie__item--favorite {
-  background-color: green;
+.header {
+  text-align: center;
+  color: $colorPrimary;
+}
+.textInput {
+  border-style: none;
+  border-bottom: 2px solid $colorPrimary;
+  margin-right: 10px;
+  font-size: 20px;
+  height: 45px;
+}
+
+.searchButton {
+  background: $colorPrimary;
+  color: $colorWhite;
+  font-size: 18px;
+  padding: 15px 20px;
+}
+.titleFav {
+  color: $colorPrimary;
+  margin: 15px 15px 0px 15px;
+}
+
+// Section search
+.searchList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.series__item {
+  background: $colorPrimaryLight;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.series__image {
+  display: flex;
+  height: 295px;
+  width: 210px;
+  padding: 20px;
+}
+.series__name {
+  color: $colorWhite;
+  text-align: center;
+}
+
+.serie__item--favourite {
+  background-color: $colorPrimary;
+  color: $colorPrimaryLight;
+}
+
+// Fav
+.containerFav {
+  display: inline-block;
+  flex-direction: column;
+  width: 25%;
+  padding-right: 40px;
+}
+.listFav {
+  list-style: none;
+  display: flex;
+}
+
+.fav__item {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+.fav__image {
+  align-items: center;
+  height: 75px;
+  width: 50px;
+  padding: 10px;
+}
+.fav__name {
+  font-size: 12px;
+  margin: 5px 0px 0px 0px;
 }

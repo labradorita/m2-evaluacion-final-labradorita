@@ -1,12 +1,17 @@
 <main class="page__main">
-  Buscador de peliculas
-
   <section class="sectionSearch">
-    <input class="js-input" type="text" />
-    <button class="js-button" type="button">Buscar</button>
+    <input class="js-input textInput" type="text" />
+    <button class="js-button searchButton" type="button">Buscar</button>
+    <h2 class="titleFav">Mis favoritas:</h2>
   </section>
+  <div class="favAndList">
+    <section class="containerFav">
+      <ul class="js-listFav listfav"></ul>
+      <!-- Meter los elementos del DOM desde js -->
+    </section>
 
-  <section class="js-list">
-    <!-- Meter los elementos del DOM desde js -->
-  </section>
+    <section class="js-list searchList">
+      <!-- Meter los elementos del DOM desde js -->
+    </section>
+  </div>
 </main>
