@@ -104,14 +104,6 @@ const getFavClassName = serieIndex => {
   }
 };
 
-// Esuchar si se ha hecho click (fav) y coger esa acción
-const listenSeries = () => {
-  const serieContainer = document.querySelectorAll(".js-serie");
-  for (const serieContainerIndex of serieContainer) {
-    serieContainerIndex.addEventListener("click", handleClick);
-  }
-};
-
 // en el handle vemos si esta o no clickada como fav
 const handleClick = ev => {
   // cogemos la serie seleccionada/clickada
@@ -125,11 +117,19 @@ const handleClick = ev => {
   paintFavSeries();
   setSeriesIntoLS();
   getSeriesFromLS();
+  paintFavSeries();
   paintSeries();
-  listenSeries();
+  //listenSeries();
   // Actualizar LS con los favoritos
   getSeriesFromLS();
   setSeriesIntoLS();
+};
+// Esuchar si se ha hecho click (fav) y coger esa acción
+const listenSeries = () => {
+  const serieContainer = document.querySelectorAll(".js-serie");
+  for (const serieContainerIndex of serieContainer) {
+    serieContainerIndex.addEventListener("click", handleClick);
+  }
 };
 
 const getClickedSerieIndex = ev => {
